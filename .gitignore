@@ -1,0 +1,41 @@
+# Environment files
+.env
+# Environment secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Docker volumes and runtime data
+nextcloud-data/
+nextcloud-db/
+
+# Nginx and detector logs
+*.log
+logs/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Virtual environments (if you test locally)
+venv/
+.venv/
+env/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Screenshots (optional — add these if you don't want them in git)
+# screenshots/
+
+# Audit logs generated at runtime
+detector/audit.log

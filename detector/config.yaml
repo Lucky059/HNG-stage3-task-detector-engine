@@ -1,0 +1,39 @@
+# ───────────────────────────────────────────────────────────────
+#  Anomaly Detection Engine — Configuration
+# ───────────────────────────────────────────────────────────────
+
+log_path: /var/log/nginx/hng-access.log
+audit_log: /var/log/detector/audit.log
+dashboard_port: 8080
+
+# Sliding window
+window_seconds: 60          # deque window width
+
+# Baseline
+baseline_window_minutes: 30     # rolling history kept
+baseline_recalc_interval: 60    # seconds between recalculations
+baseline_min_samples: 10        # minimum samples before we trust the baseline
+baseline_floor_rps: 1.0         # never let mean drop below this (avoids div-by-zero)
+
+# Anomaly thresholds
+zscore_threshold: 1.5           # z-score that triggers an alert
+rate_multiplier: 2.0            # rate > mean * this also triggers
+error_rate_multiplier: 0.1      # 4xx/5xx surge tightens thresholds
+
+# Auto-unban backoff schedule (minutes)
+unban_schedule: [1, 2, 3]       # after 3 strikes → permanent ban
+
+# Slack
+slack_webhook_url: ""
+
+# Dashboard refresh
+dashboard_refresh_ms: 3000
+
+# Enforcement (Strict)
+ban_enabled: true
+ban_duration_minutes: 10       # bans last 10 minutes
+ban_log: /var/log/detector/ban.log
+unban_schedule: [30, 60]       # 1st strike → 30 min ban, 2nd strike → 60 min ban, 3rd strike → permanent
+
+  
+
